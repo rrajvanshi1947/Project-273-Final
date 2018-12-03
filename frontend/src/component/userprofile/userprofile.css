@@ -1,0 +1,71 @@
+.vp-bg1 {
+    background-image: url("../Images/LinkedIn1.png");
+    background-size: cover;
+    height: 200px;
+}
+
+.vpmodal {
+    width: 1400px;
+    vertical-align: middle;
+}
+.vpmodal1{
+    width: 400px;
+    height: 350px;
+    vertical-align: middle;
+    left: 400px;
+    top:200px;
+}
+.vpmodal2 {
+    width: 600px;
+    height: 600px;
+    vertical-align: middle;
+    left: 400px;
+    top: 100px;
+}
+.modal-body {
+    height: 600px;
+    overflow-y: auto;
+}
+
+.modal-body1 {
+    height: 450px;
+    overflow-y: auto;
+}
+
+.modal-body2 {
+    height: 350px;
+    width: 400px;
+    overflow-y: auto;    
+}
+.modal-body4 {
+    height: 600px;
+    width: 600px;
+    overflow-y: auto;
+}
+.modal-dialog {
+    width: 800px;
+    overflow-y: initial !important
+}
+.hidden {
+    display: none;
+}   
+.modal-body6 {
+    height: 400px;
+    width: 300px;
+    overflow-y: auto;
+    left: 400px;
+    top: 100px; 
+}
+.modal-dialog1{
+    width: 300px;
+    height: 400px;
+    margin-left: 400px;
+    margin-top: 100px;
+}
+.vpmodal4 {
+    width: 800px;
+    height: 600px;
+    vertical-align: middle;
+    left: 400px;
+    top: 100px;
+}
