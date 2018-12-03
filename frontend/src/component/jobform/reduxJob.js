@@ -103,7 +103,7 @@ let ApplyJob = props => {
                         <label for="phonenum" style={{ marginTop: "20px" }}>Contact Information</label>
                         <Field type="number" component={renderField} className="form-control" id="phonenum" name="phonenum" validate={[required]} />
                     </div>
-                    {/*<div className="col-sm-12">
+                    <div className="col-sm-12">
                     <h5 style={{marginLeft:'18px'}}><b>Resume</b></h5>
                     <h5 style={{marginLeft:'18px'}}>PDF format accepted</h5>
                     <div style={{marginLeft:'18px'}}><FileUpload onResumeUpload={props.handleResume} letter="resume"/></div>
@@ -112,7 +112,7 @@ let ApplyJob = props => {
                     <h5 style={{marginLeft:'18px'}}><b>Cover letter(Optional)</b></h5>
                     <h5 style={{marginLeft:'18px'}}>PDF format accepted</h5>
                     <div style={{marginLeft:'18px'}}><FileUpload1 onCoverletterUpload={props.handleCoverletter} letter="coverletter"/></div>
-                    </div>*/}
+                    </div>
 
                     <div className="form-group col-sm-12">
                         <label for="authorization" style={{ marginTop: "20px" }}>Are you legally authorized to work in US?</label>
