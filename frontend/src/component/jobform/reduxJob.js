@@ -31,6 +31,51 @@ const renderField = ({
             </div>
         </div>
     )
+const field1 =({ 
+input,
+label,
+type,
+value,
+placeholder,
+onResumeUpload,
+letter,
+meta: { touched, error, warning }
+}) => (
+    <div>
+        <div>
+        <FileUpload onResumeUpload={onResumeUpload} letter={letter}/>
+        </div>
+        <div className="text-danger">
+            {touched &&
+                ((error && <span>{error}</span>) ||
+                    (warning && <span>{warning}</span>))}
+        </div>
+    </div>
+)
+
+const field2 =({ 
+    input,
+    label,
+    type,
+    value,
+    placeholder,
+    onCoverletterUpload,
+    letter,
+    meta: { touched, error, warning }
+    }) => (
+        <div>
+            <div>
+            <FileUpload1 onCoverletterUpload={onCoverletterUpload} letter={letter}/>
+            </div>
+            <div className="text-danger">
+                {touched &&
+                    ((error && <span>{error}</span>) ||
+                        (warning && <span>{warning}</span>))}
+            </div>
+        </div>
+    )
+
+
 const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
       ? 'Invalid email address'
@@ -66,47 +111,47 @@ let ApplyJob = props => {
                     <div class="form-group">
                         <div className="col-sm-6">
                             <label for="firstname">First Name</label>
-                            <Field type="text" component={renderField} className="form-control"  id="firstname" name="firstname" validate={[required,name]}/>
+                            <Field type="text" component={renderField} className="form-control"  id="firstname" name="firstname" validate={[name]}/>
                         </div>
                         <div className="col-sm-6">
                             <label for="lastname">Last Name</label>
-                            <Field type="text"  component={renderField} className="form-control" id="lastname" name="lastname" validate={[required, name]}/>
+                            <Field type="text"  component={renderField} className="form-control" id="lastname" name="lastname" validate={[ name]}/>
                         </div>
                     </div>
                     <div className="form-group col-sm-6" >
                         <label for="Designation" style={{ marginTop: "20px" }}>Designation</label>
-                        <Field style={{ height: "60px" }} component={renderField} type="text" className="form-control" id="designation" name="designation" validate={[required]}/>
+                        <Field style={{ height: "60px" }} component={renderField} type="text" className="form-control" id="designation" name="designation" validate={[]}/>
                     </div>
                     <div className="form-group col-sm-6">
                         <label for="city" style={{ marginTop: "20px" }}>City</label>
-                        <Field type="text" className="form-control" component={renderField} id="city" name="city" validate={[required]}/>
+                        <Field type="text" className="form-control" component={renderField} id="city" name="city" validate={[]}/>
                     </div>
                     <div className="form-group col-sm-6">
                         <label for="state" style={{ marginTop: "20px" }}>State</label>
-                        <Field type="text" className="form-control" component={renderField} id="state" name="state" validate={[required]}/>
+                        <Field type="text" className="form-control" component={renderField} id="state" name="state" validate={[]}/>
                     </div>
                     <div className="form-group col-sm-6">
                         <label for="country" style={{ marginTop: "20px" }}>Country/Region</label>
-                        <Field type="text" component={renderField} className="form-control" id="country" name="country" validate={[required]}/>
+                        <Field type="text" component={renderField} className="form-control" id="country" name="country" validate={[]}/>
                     </div>
 
                     <div className="form-group col-sm-6">
                         <label for="zipcode" style={{ marginTop: "20px" }}>ZIP code</label>
-                        <Field type="number" component={renderField}  className="form-control" id="zipcode" name="zipcode" validate={[required]} />
+                        <Field type="number" component={renderField}  className="form-control" id="zipcode" name="zipcode" validate={[]} />
                     </div>
 
                     <div className="form-group col-sm-6">
                         <label for="emailID" style={{ marginTop: "20px" }}>Email Address</label>
-                        <Field type="text" component={renderField} className="form-control" id="emailID" name="emailID" validate={[required, email]} />
+                        <Field type="text" component={renderField} className="form-control" id="emailID" name="emailID" validate={[ email]} />
                     </div>
                     <div className="form-group col-sm-6">
                         <label for="phonenum" style={{ marginTop: "20px" }}>Contact Information</label>
-                        <Field type="number" component={renderField} className="form-control" id="phonenum" name="phonenum" validate={[required]} />
+                        <Field type="number" component={renderField} className="form-control" id="phonenum" name="phonenum" validate={[]} />
                     </div>
                     <div className="col-sm-12">
                     <h5 style={{marginLeft:'18px'}}><b>Resume</b></h5>
                     <h5 style={{marginLeft:'18px'}}>PDF format accepted</h5>
-                    <div style={{marginLeft:'18px'}}><FileUpload onResumeUpload={props.handleResume} letter="resume"/></div>
+                    <div style={{marginLeft:'18px'}}><FileUpload component={field1} onResumeUpload={props.handleResume} letter="resume"/></div>
                     </div>
                     <div className="col-sm-12">
                     <h5 style={{marginLeft:'18px'}}><b>Cover letter(Optional)</b></h5>
@@ -125,7 +170,7 @@ let ApplyJob = props => {
                         <label for="authorization" style={{ marginTop: "20px" }}>Will you now, or in the future, require sponsorship for employment 
                     visa status (e.g. H-1B visa status)?</label>
                     <div>
-                    <label className="radio-inline"><Field type="radio" component="input" name="sponsorship" value="Yes" defaultChecked={true}/> Yes</label>
+                    <label className="radio-inline"><Field type="radio" component="input" name="sponsorship" value="Yes"/> Yes</label>
                     <label className="radio-inline"><Field type="radio" name="sponsorship" component="input" value="No"/> No</label>
                     </div>
                     </div>
@@ -135,8 +180,8 @@ let ApplyJob = props => {
                         <Field style={{height: "100px"}} type="text" component={renderField} className="form-control" id="summary" name="summary" />
                     </div>
                     <div className="modal-footer col-sm-12" style={{float:'right'}}>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" disabled={pristine || submitting} className="btn btn-primary">Submit</button>
+                    <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" className="btn btn-primary">Submit</button>
                 </div>
                 </form>
                 </div>
@@ -153,7 +198,7 @@ ApplyJob = reduxForm({
 
 ApplyJob = connect(
     state => ({
-        initialValues: state.apply.applyForm, // pull initial values from account reducer
+        initialValues: state.login.loginData, // pull initial values from account reducer
         //values: state.login,
     })
 )(ApplyJob)
