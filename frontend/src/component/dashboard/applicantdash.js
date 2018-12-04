@@ -18,11 +18,11 @@ class ApplicantDashboard extends Component {
         };
     }
     componentDidMount() {
-        console.log(this.props)
-
+        console.log(this.props);
+        console.log(this.props.login.emailID);
         axios.get(`/graph7`, {
             params: {
-                id: "mani@gmail.com"
+                id: this.props.login.emailID
             }
         })
             .then((response) => {

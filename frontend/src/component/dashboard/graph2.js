@@ -22,7 +22,7 @@ class Graph2 extends Component {
 
         axios.get(`/graph2`, {
             params: {
-                id: 6675
+                id: 4554
             }
         })
             .then((response) => {

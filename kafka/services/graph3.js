@@ -9,7 +9,7 @@ function handle_request(msg, callback){
     AppliedJobs.aggregate([
         {
             $match: {
-                user_email: msg,
+                // user_email: msg,
                 applicationstatus: "true"
             }
         },

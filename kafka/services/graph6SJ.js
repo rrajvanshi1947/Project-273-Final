@@ -5,7 +5,7 @@ var AppliedJobs = require('../models/appliedJobs');
 function handle_request(msg, callback){
     console.log("Inside Graph6SJ at Backend", msg);
 
-    AppliedJobs.countDocuments({city_state: msg, applicationstatus: "false"})
+    AppliedJobs.countDocuments({city: msg, applicationstatus: "false"})
     .then(response =>{
         console.log("data fetched:", response);
         callback(null, response);

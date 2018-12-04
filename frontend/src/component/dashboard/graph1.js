@@ -23,7 +23,7 @@ class Graph1 extends Component {
         console.log("Inside Graph1, props email: ", this.props.login.emailID);
         axios.get(`/graph1`, {
             params: {
-                id: "test@test.com"
+                id: this.props.login.emailID
             }
         })
             .then((response) => {
@@ -61,7 +61,7 @@ class Graph1 extends Component {
         console.log("count: ", g1count0, g1count1, g1count2, g1count3, g1count4, g1count5, g1count6, g1count7, g1count8, g1count9, g1jobid0, g1jobid1, g1jobid2, g1jobid3, g1jobid5, g1jobid6, g1jobid7, g1jobid8, g1jobid9);
 
         var g1data = {
-            labels: [g1jobid0, g1jobid1, g1jobid2, g1jobid3, g1jobid5, g1jobid6, g1jobid7, g1jobid8, g1jobid9],
+            labels: [g1jobid0, g1jobid1, g1jobid2, g1jobid3, g1jobid4, g1jobid5, g1jobid6, g1jobid7, g1jobid8, g1jobid9],
             columns: [
                 ['No of applications', g1count0, g1count1, g1count2, g1count3, g1count4, g1count5, g1count6, g1count7, g1count8, g1count9]
             ],

@@ -74,6 +74,9 @@ let Introduction = props => {
                 </div>
             </div>
         )
+        var uploadResume =(
+            <div></div>
+        )
     } else {
         var Recruiter = (
             <div style={{ marginLeft: "16px", width: "96%" }}>
@@ -81,7 +84,16 @@ let Introduction = props => {
                 <Field type="text" component={renderField} id="headline" name="headline" validate={[required]} />
             </div>
         )
+        var uploadResume = (
+            <div>
+            <h5 style={{ marginTop: "20px", marginLeft: "16px" }}>Upload Resume</h5>
+                                    <div style={{ marginLeft: '18px' }}><FileUpload onResumeUpload={props.handleResume} letter="resume" /> {props.children[10]}</div>
+            
+            </div>
+        )
     }
+
+
 
     let connect = (<button onClick={props.connect} style={{  height: "40px", width: "200px", fontSize: "16px", marginTop: "30px" }} className={(isemailMatch === "false") ? 'btn btn-primary' : 'hidden'}>Connect</button>);
     let showButton = typeof props.but!=="undefined"? props.but.buttons:"";
@@ -185,9 +197,9 @@ let Introduction = props => {
                                         <label for="summary" style={{ marginTop: "10px" }}>Profile Summary</label>
                                         <Field type="text" component={renderField} id="summary" name="summary" />
                                     </div>
-                                    <h5 style={{ marginTop: "20px", marginLeft: "16px" }}>Upload Resume</h5>
-
-                                    <div style={{ marginLeft: '18px' }}><FileUpload onResumeUpload={props.handleResume} letter="resume" /> {props.children[10]}</div>
+                                    {/*<h5 style={{ marginTop: "20px", marginLeft: "16px" }}>Upload Resume</h5>
+    <div style={{ marginLeft: '18px' }}><FileUpload onResumeUpload={props.handleResume} letter="resume" /> {props.children[10]}</div> */}
+                                    {uploadResume}
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary" >Save changes</button>

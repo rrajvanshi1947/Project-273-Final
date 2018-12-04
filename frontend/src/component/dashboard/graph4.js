@@ -23,7 +23,7 @@ class Graph4 extends Component {
         console.log("Inside Graph4, props email: ", this.props.login.emailID);
         axios.get(`/graph4`, {
             params: {
-                id: "test@test.com"
+                id: this.props.login.emailID
             }
         })
             .then((response) => {

@@ -24,7 +24,7 @@ class Graph6 extends Component {
         console.log("Inside Graph6, props email: ", this.props.login.emailID);
         axios.get(`/graph6`, {
             params: {
-                id: "Milpitas"
+                id: "San Jose"
             }
         })
             .then((response) => {
@@ -36,7 +36,7 @@ class Graph6 extends Component {
 
         axios.get(`/graph6sj`, {
             params: {
-                id: "Milpitas"
+                id: "San Jose"
             }
         })
             .then((response) => {

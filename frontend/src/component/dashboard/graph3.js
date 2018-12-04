@@ -21,7 +21,7 @@ class Graph3 extends Component {
         console.log("Inside Graph3, props email: ", this.props.login.emailID);
         axios.get(`/graph3`, {
             params: {
-                id: 'jyo@gmail.com'
+                id: this.props.login.emailID
             }
         })
             .then((response) => {
