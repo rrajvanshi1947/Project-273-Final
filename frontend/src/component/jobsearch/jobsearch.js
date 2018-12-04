@@ -32,12 +32,15 @@ class Jobsearch extends Component {
           filteredData:[],
           itemPerPage:[],
           activePage:1,
+          savedJobs:[],
+          appliedJobs:0,
+          appliedMessage:[]
         };  
         this.handlejobtitleChange = this.handlejobtitleChange.bind(this);
         this.handlelocationChange = this.handlelocationChange.bind(this);
       }
       componentDidMount(){
-        axios.get(`/userprofile`, {
+        /*axios.get(`/userprofile`, {
             params: {
                 id: this.props.login.emailID
             }
@@ -55,8 +58,38 @@ class Jobsearch extends Component {
                     emailID:response.data.emailID
                 }
                 this.props.applyForm(output);
-            });    
-      }
+            }); */
+            axios.get(`/jobappl`, {
+                params: {
+                    id: this.props.login.emailID
+                }
+            }) 
+            .then((response) => {
+                console.log("response",response.data);
+                //update the state with the response data
+                let saved = [];
+                let applied = []
+                if(typeof response.data !=='undefined'){
+                    for(let data of response.data){
+                        console.log(data)
+                        if(data.applicationstatus ==="true"){
+                            applied.push(data)
+                        }
+                        else {
+                            saved.push(data)
+                        }
+                    }
+                }
+                this.setState({
+                    savedJobs : saved,
+                    appliedJobs:applied
+            })
+        })
+            .catch(err=>{
+                this.setState({savedJobs:0,appliedJobs:0})
+            })  
+      
+    }
       handlelocationChange = (e) => {
         this.setState({
           location: e.target.value
@@ -346,9 +379,9 @@ class Jobsearch extends Component {
             </span>
             <button type="submit" className="btn btn-primary btn-lg" onClick={this.search} style={{marginLeft:"20px"}}>Search</button>            
             
-            <div className="col-sm-12">
-                <Link to="#">6 Saved Jobs</Link>
-                <Link to="#">5 Applied Jobs</Link>
+            <div className="col-sm-12" style={{border:'3px solid black'}}>
+                <Link to="#"><strong>{`${this.state.savedJobs.length} Saved Jobs`}</strong></Link>
+                <Link to="#" style={{paddingLeft:'30px'}}><strong>{`${this.state.appliedJobs.length} Applied Jobs`}</strong></Link>
             </div>
             
             <div className="col-sm-12"> Filters:

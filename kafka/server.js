@@ -38,6 +38,7 @@ var graph6sj = require('./services/graph6SJ');
 var graph7 = require('./services/graph7');
 var getviews = require('./services/getviews');
 var searchclick = require('./services/searchclick');
+var jobapplyuser = require('./services/jobapplybyuser');
 
 console.log("server is running ");
 
@@ -108,3 +109,4 @@ handleTopicRequest("graph6sj", graph6sj);
 handleTopicRequest("graph7", graph7);
 handleTopicRequest("getviews", getviews);
 handleTopicRequest("searchclick", searchclick);
+handleTopicRequest("jobappl",jobapplyuser)

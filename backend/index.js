@@ -47,6 +47,7 @@ const editJob = require("./routes/editjob");
 const graphRoutes = require("./routes/graphs");
 const getViews = require("./routes/getviews");
 const searchclick = require('./routes/searchclick');
+const jobByUser = require('./routes/jobapplybyuser')
 
 //specify the path of static directory
 //app.use(express.static(__dirname + "/public"));
@@ -123,6 +124,7 @@ app.get("/graph6sj", graphRoutes);
 app.get("/graph7", graphRoutes);
 app.post("/getviews", getViews);
 app.post('/searchclick', searchclick);
+app.get('/jobappl',jobByUser)
 
 // start your server on port 3001
 app.listen(3001);

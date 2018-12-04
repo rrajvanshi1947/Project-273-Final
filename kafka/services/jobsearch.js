@@ -9,10 +9,10 @@ function handle_request(msg, callback){
     console.log("Inside Job Dashboard Request");
     console.log("jobtitle",msg.jobtitle);
     console.log("loc",msg.location);
-    var location = msg.location!==null?msg.location.replace(/\s/g,''):null;
-    var jobtitle = msg.jobtitle!==null?msg.jobtitle.replace(/\s/g,''):null;
-    Jobs.find({"location": { '$regex' : location, '$options' : 'i' },
-                    "job_title": { '$regex' : jobtitle, '$options' : 'i' }
+    var location = msg.location!==null?msg.location.replace(/\s+/g,"\\s+"):null;
+    var jobtitle = msg.jobtitle!==null?msg.jobtitle.replace(/\s+/g,"\\s+"):null;
+    Jobs.find({"location": { '$regex' : location, '$options' : 'gi' },
+                    "job_title": { '$regex' : jobtitle, '$options' : 'gi' }
             },function(err,jobresult){
             if (err) {
                 callback(err,null);
