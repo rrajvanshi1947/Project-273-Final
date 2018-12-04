@@ -320,6 +320,22 @@ class Jobsearch extends Component {
     let itemList = this.state.filteredData.slice(10*(pageNumber-1),pageNumber*10)
     this.setState({activePage: pageNumber,itemPerPage:itemList}); 
 }
+
+savedJobs=()=>{
+    let data = this.state.savedJobs;
+    console.log(data)
+    this.props.history.push({
+          pathname:`/savedjob`,
+          state:data,
+  })
+}
+
+appliedJobs=()=>{
+    this.props.history.push({
+          pathname:`/appliedjob`,
+          state:this.state.appliedJobs
+  })
+}
     render(){
         let joblistview = this.state.itemPerPage.map((job,index) => {
             return (
@@ -380,8 +396,8 @@ class Jobsearch extends Component {
             <button type="submit" className="btn btn-primary btn-lg" onClick={this.search} style={{marginLeft:"20px"}}>Search</button>            
             
             <div className="col-sm-12" style={{border:'3px solid black'}}>
-                <Link to="#"><strong>{`${this.state.savedJobs.length} Saved Jobs`}</strong></Link>
-                <Link to="#" style={{paddingLeft:'30px'}}><strong>{`${this.state.appliedJobs.length} Applied Jobs`}</strong></Link>
+                <Link onClick={this.savedJobs} to="#"><strong>{`${this.state.savedJobs.length} Saved Jobs`}</strong></Link>
+                <Link onClick={this.appliedJobs} to="#" style={{paddingLeft:'30px'}}><strong>{`${this.state.appliedJobs.length} Applied Jobs`}</strong></Link>
             </div>
             
             <div className="col-sm-12"> Filters:

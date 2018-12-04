@@ -16,6 +16,8 @@ import EditJob from './component/editjob/editjob';
 import Viewjobappliedform from './component/viewjobappliedform/viewjobappliedform';
 import Connection from './component/connection/connections';
 import ApplicantDashboard from './component/dashboard/applicantdash';
+import SavedJob from './component/jobsearch/savedjob';
+import AppliedJob from './component/jobsearch/appliedjob';
 
 class Router extends Component {
     render() {
@@ -38,6 +40,8 @@ class Router extends Component {
                 <Route exact path="/connections" component={Connection} />
                 <Route exact path="/viewjobappliedform/:appid" component={Viewjobappliedform} />
                 <Route exact path="/applicantdashboard" component={ApplicantDashboard}/>
+                <Route exact path="/savedjob" component={SavedJob}/>
+                <Route exact path="/appliedjob" component={AppliedJob}/>
             </Switch>
             </BrowserRouter>
         )
