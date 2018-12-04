@@ -167,7 +167,7 @@ let Introduction = props => {
                                         </div>
                                         <div className="col-sm-6">
                                             <label for="zipcode" style={{ marginTop: "20px" }}>Zip code</label>
-                                            <Field type="number" component={renderField} id="zipcode" name="zipcode" validate={[required,validZip]} />
+                                            <Field type="text" component={renderField} id="zipcode" name="zipcode" validate={[required,validZip]} />
                                         </div>
                                     </div>
                                     <label style={{ marginLeft: "16px", marginTop: "20px", fontSize: "20px" }}>Contact Info</label>

@@ -58,7 +58,7 @@ let RegisterForm = props => {
                         <Field type="email" component={renderField} id="emailID" name="emailID" validate={[required, email]}/>
                     </div>
                     <div className="form-group">
-                        <label for="pwd">Password(6 or more characters)</label>
+                        <label for="pwd">Password</label>
                         <Field type="password" component={renderField} id="pwd" name="password" validate={[required]}/>
                     </div>
                     <div >

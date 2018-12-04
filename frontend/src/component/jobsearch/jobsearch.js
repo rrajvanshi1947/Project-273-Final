@@ -345,6 +345,12 @@ class Jobsearch extends Component {
                 <input type="text" className="form-control input-lg" name="location" placeholder="Search Location" onChange={this.handlelocationChange}  required/>
             </span>
             <button type="submit" className="btn btn-primary btn-lg" onClick={this.search} style={{marginLeft:"20px"}}>Search</button>            
+            
+            <div className="col-sm-12">
+                <Link to="#">6 Saved Jobs</Link>
+                <Link to="#">5 Applied Jobs</Link>
+            </div>
+            
             <div className="col-sm-12"> Filters:
             <select className="input-lg" name="locsearch" onChange={this.selectLoc} style={{backgroundColor:'#f4f4f4',cursor:'pointer',marginLeft:'20px'}}> 
                 <option value='' selected disabled>Location</option>
