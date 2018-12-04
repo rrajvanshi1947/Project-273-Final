@@ -1,28 +1,27 @@
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
-const ConnectModel = require("../models/connections");
+const User = require("../models/users");
 function handle_request(msg, callback) {
-  console.log("Logged in user userid :", msg.userid, "email : ", msg.useremail);
-  console.log("Connecting to :", msg.connect);
-  ConnectModel.findOneAndUpdate(
-    { email: msg.useremail },
+  console.log(msg)
+  let email1 = msg[0].emailID;
+  let email2 = msg[1].emailID
+  User.findOneAndUpdate(
+    { emailID: email1 },
     {
-      $push: { pending: mongoose.Types.ObjectId(msg.connect) }
-    }
+      $push: { connections: msg[1]
+      } }
+    
   )
-    .then(connect => {
-      callback(null, connect);
-    })
-
-    .catch(error => {
+  .catch(error => {
       callback(error, null);
     });
-  ConnectModel.findOneAndUpdate(
-    { email: msg.connectemail },
-    {
-      $push: { pending: mongoose.Types.ObjectId(msg.userid) }
-    }
-  )
+    User.findOneAndUpdate(
+      { emailID: email2 },
+      {
+        $push: { connections: msg[0]
+        } }
+      
+    )
     .then(success => {
       callback(null, success);
     })

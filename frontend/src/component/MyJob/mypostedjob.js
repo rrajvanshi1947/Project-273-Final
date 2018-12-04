@@ -75,6 +75,16 @@ class MyPostedJob extends Component {
 //this.setState({navi:<Redirect to={{ pathname : `/Jobform/${job.jobid}` , state: { someID : 'SOME_ID' } }} target="_blank" />})
 
    }
+
+   profile(appid){
+       this.props.history.push(`/viewjobappliedform/${appid}`)
+   }
+
+   resume(resumeurl){
+    console.log(resumeurl)
+    window.open(resumeurl, '_blank');
+   }
+
     render(){
         let joblistview = this.state.joblist.map((job,index) => {
             return (
@@ -123,8 +133,8 @@ class MyPostedJob extends Component {
                     <h6>{`Application ID: ${applicant.applicationid}`}</h6>
                 </div>  
                 <div className="col-sm-6">
-                    <span style={{marginTop:'20px'}}><button className="btn btn-primary btn-md">View Resume</button>
-                    <button className="btn btn-primary btn-md" style={{marginLeft:"20px"}}>View Profile</button>
+                    <span style={{marginTop:'20px'}}><button onClick={()=>this.resume(applicant.resumeurl)} className="btn btn-primary btn-md">View Resume</button>
+                    <button onClick={()=>this.profile(applicant.applicationid)} className="btn btn-primary btn-md" style={{marginLeft:"20px"}}>View Application</button>
                     </span>
                 </div>                  
                 </div>

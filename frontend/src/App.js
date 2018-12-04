@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './feed.scss;
 import Router from './router';
 import {connect} from 'react-redux';
 import axios from 'axios';

@@ -46,8 +46,15 @@ const userSchema = new Schema({
   imageURL: String,
   type: String,
   resumeURL:String,
-  connection: [Schema.Types.ObjectId],
-  pending: [Schema.Types.ObjectId]
+  noofviews: [Number],
+  connections: [{
+    emailID: String,
+    firstname:String,
+    lastname: String,
+    company:String,
+    location:String,
+    buttons: String,
+}]  
 });
 
 //userSchema.plugin(autoIncrement.plugin, { model : 'User' , field: 'id' });

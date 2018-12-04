@@ -7,6 +7,22 @@ import FileUpload from '../resume/resume';
 
 //Validations
 
+const validState = value =>
+  value &&
+  !/^(AL|Alabama|alabama|AK|Alaska|alaska|AZ|Arizona|arizona|AR|Arkansas|arkansas|CA|California|california|CO|Colorado|colorado|CT|Connecticut|connecticut|DE|Delaware|delaware|FL|Florida|florida|GA|Georgia|georgia|HI|Hawaii|hawaii|ID|Idaho|idaho|IL|Illinois|illinois|IN|Indiana|indiana|IA|Iowa|iowa|KS|Kansas|kansas|KY|Kentucky|kentucky|LA|Louisiana|louisiana|ME|Maine|maine|MD|Maryland|maryland|MA|Massachusetts|massachusetts|MI|Michigan|michigan|MN|Minnesota|minnesota|MS|Mississippi|mississippi|MO|Missouri|missouri|MT|Montana|montana|NE|Nebraska|nebraska|NV|Nevada|nevada|NH|New Hampshire|new hampshire|NJ|New Jersey|new jersey|NM|New Mexico|new mexico|NY|New York|new york|NC|North Carolina|new carolina|ND|North Dakota|north dakota|OH|Ohio|ohio|OK|Oklahoma|oklahoma|OR|Oregon|oregon|PA|Pennsylvania|pennsylvania|RI|Rhode Island|rhode island|SC|South Carolina|south carolina|SD|South Dakota|south dakota|TN|Tennessee|tennessee|TX|Texas|texas|UT|Utah|utah|VT|Vermont|vermont|VA|Virginia|virginia|WA|Washington|washington|WV|West Virginia|west virginia|WI|Wisconsin|wisconsin|WY|Wyoming|wyoming)$/i.test(
+    value
+  )
+    ? "Inavlid State - Only US States accepted"
+    : undefined;
+
+const validZip = value =>
+  value && !/^(0|[1-9][0-9]{9})$/i.test(value) ? "Invalid zip code" : undefined;
+
+const validPhone = value =>
+  value && !/^[1-9][0-9]{0,9}$/i.test(value) ? "Invalid Phone no" : undefined;
+
+
+
 var message=null;
 const email = value =>
     value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
@@ -67,6 +83,24 @@ let Introduction = props => {
         )
     }
 
+    let connect = (<button onClick={props.connect} style={{  height: "40px", width: "200px", fontSize: "16px", marginTop: "30px" }} className={(isemailMatch === "false") ? 'btn btn-primary' : 'hidden'}>Connect</button>);
+    let showButton = typeof props.but!=="undefined"? props.but.buttons:"";
+
+    if(props.pending === true || showButton==="pending"){
+        connect = ( <button style={{  height: "40px", width: "200px", fontSize: "16px", marginTop: "30px" }} className={(isemailMatch === "false") ? 'btn btn-warning' : 'hidden'}>Pending</button>)
+    }
+
+    if(showButton==="accept"){
+        connect = ( <span><button onClick={props.accept} style={{  height: "40px", width: "200px", fontSize: "16px", marginTop: "30px" }} className={(isemailMatch === "false") ? 'btn btn-primary' : 'hidden'}>Accept</button>
+         <button onClick={props.deleteCon} style={{  height: "40px", width: "200px", fontSize: "16px", marginTop: "30px" }} className={(isemailMatch === "false") ? 'btn btn-warning' : 'hidden'}>Ignore</button></span>)
+    }
+
+    if(props.remove === true || showButton==="remove"){
+        connect = (<span style={{color:'green'}}>You are now connected
+        <button onClick={props.deleteCon} style={{  height: "40px", width: "200px", fontSize: "16px", marginTop: "30px" }} className={(isemailMatch === "false") ? 'btn btn-danger' : 'hidden'}>Remove Connection</button>
+        </span>)
+   }
+
     if (isemailMatch === "true") {
         var hideDetails = (
             <button type="button" class="btn" data-toggle="modal" data-target="#vpModal1" style={{ float: "right" }} >
@@ -81,7 +115,7 @@ let Introduction = props => {
                     <h3>{props.children[0]} {props.children[1]}</h3>
                     <h4>{props.children[2]}</h4>
                     <h5>{props.children[3]} {props.children[4]}</h5>
-                    <button style={{  height: "40px", width: "200px", fontSize: "16px", marginTop: "30px" }} className={(isemailMatch === "false") ? 'btn btn-primary' : 'hidden'}>Connect</button>
+                    {connect}
                 </div>
                 <div class="col-sm-6">
                     {hideDetails}
@@ -123,7 +157,7 @@ let Introduction = props => {
                                         </div>
                                         <div className="col-sm-6">
                                             <label for="state">State</label>
-                                            <Field type="text" component={renderField} id="state" name="state" validate={[required, name]} />
+                                            <Field type="text" component={renderField} id="state" name="state" validate={[required, name,validState]} />
                                         </div>
                                     </div>
                                     <div class="form-group" >
@@ -133,7 +167,7 @@ let Introduction = props => {
                                         </div>
                                         <div className="col-sm-6">
                                             <label for="zipcode" style={{ marginTop: "20px" }}>Zip code</label>
-                                            <Field type="number" component={renderField} id="zipcode" name="zipcode" validate={[required]} />
+                                            <Field type="number" component={renderField} id="zipcode" name="zipcode" validate={[required,validZip]} />
                                         </div>
                                     </div>
                                     <label style={{ marginLeft: "16px", marginTop: "20px", fontSize: "20px" }}>Contact Info</label>
@@ -144,7 +178,7 @@ let Introduction = props => {
                                         </div>
                                         <div className="col-sm-6">
                                             <label for="phonenum">Phone number</label>
-                                            <Field type="number" component={renderField} id="phonenum" name="phonenum" validate={[required]} />
+                                            <Field type="number" component={renderField} id="phonenum" name="phonenum" validate={[required,validPhone]} />
                                         </div>
                                     </div>
                                     <div className={ (isRecruiter === "1") ? "hidden" : 'form-group' } style={{ marginLeft: "16px", width: "96%" }}>
@@ -201,6 +235,7 @@ Introduction = connect(
     state => ({
       initialValues: state.profile.profileData, // pull initial values from account reducer
       //values: state.login.loginData,
+       
     }),
   )(Introduction);
 

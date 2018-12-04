@@ -38,7 +38,7 @@ router.get("/jobapply", function(req, res) {
             console.log("Inside get jobapply-get  else");
             //res.writeHead(200);
             console.log(results);
-            res.end(results);
+            res.end(JSON.stringify(results));
             }
         
     });

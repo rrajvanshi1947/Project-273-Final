@@ -52,6 +52,7 @@ User.findOne({emailID: data.emailID})     //,type: data.type
                     skill: user.skill !=undefined ? user.skill:'',
                     imageURL: user.imageURL !=undefined ? user.imageURL:'',
                     resumeURL: user.resumeURL !=undefined ? user.resumeURL:'',
+                    connections:user.connections !=undefined ? user.connections:''
                   }
                 console.log("User logged in successfully", output)
                 callback(null,output)

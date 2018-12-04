@@ -3,6 +3,7 @@ import Header from '../header';
 import { connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import PropTypes from 'prop-types';
+import FeedDisplay from './FeedDisplay';
 import * as actionCreators from '../../actions/actionCreators';
 
 class Feed extends Component {
@@ -10,7 +11,8 @@ class Feed extends Component {
         return (
             <div>
             <Header/>
-            {console.log(this.props.login.email)}
+<FeedDisplay/>
+            
             </div>
         )
     }

@@ -6,31 +6,10 @@ autoIncrement.initialize(mongoose.connection);
 mongoose.Promise = global.Promise;
 var Schema = mongoose.Schema;
 
-// var NewJob = new mongoose.Schema({
-//    jobid: String,    //unsure about it  
-//   company: String,    //Step 1
-//   job_title: String,
-//   location: String,
-//   job_function: String,
-//   employment_type: String,
-//   company_industry: String,
-//   seniority_level: String,
-//   job_description: String,
-//   receive_applicants: String,
-//   questions: {legal_authorization: Boolean, sponsorship: Boolean }, 
-//   hear_about: String,   
-//   skills_required: [String],      //Step 2
-//   experience: Number,
-//   education_required: [String],
-//   daily_budget: Number,   //Step 3
-//   pay_method: String  //Final step
-// })
-
 const jobsSchema = new Schema({
   user_email: String,
-  // jobs: [NewJob]
-  jobid:{ type: Number, default: 1, required:true },    //unsure about it  
-  company: String,    //Step 1
+  jobid:{ type: Number, default: 10000, required:true },    //unsure about it  
+  company: String,
   job_title: String,
   location: String,
   job_function: String,
@@ -38,24 +17,21 @@ const jobsSchema = new Schema({
   company_industry: String,
   seniority_level: String,  
   job_description: String,
-  //receive_applicants: String,
-  //legal_authorization: Boolean,
-  //sponsorship: Boolean, 
   hear_about: String,   
   skills_required: String,      //Step 2
   experience: Number,
   education_required: String,
   daily_budget: Number,   //Step 3
-  //pay_method: String  //Final step
   date:{type:Date,default:Date.now},
   output:String,
-  apply:String
-
+  apply:String,
+  noofclicks:Number,
+  noofviewsnotapplied:Number
 })
 jobsSchema.plugin(autoIncrement.plugin, { model : 'jobsSchema' , field: 'jobid' });
 
 mongoose.set('useCreateIndex', true)
 
-const Jobs = mongoose.model('jobs',jobsSchema);
+const Jobs = mongoose.model('Jobs',jobsSchema);
 
 module.exports = Jobs;

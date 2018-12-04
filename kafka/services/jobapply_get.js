@@ -6,7 +6,7 @@ function handle_request(msg, callback){
     let data = msg;
     console.log("Data :", data);
     AppliedJobs.findOne({ 
-            user_email: msg
+            applicationid: msg
     })
     .then(response=>{ 
         console.log("Jobs retrieved successfully", response)

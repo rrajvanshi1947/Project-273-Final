@@ -1,13 +1,12 @@
 var mongoose = require("mongoose");
 var Jobs = require("../models/jobs");
 
-function handle_request(body, callback) {
+function handle_request(msg, callback) {
   console.log("Posting a new job");
-  console.log(body);
+  console.log(msg);
 
-  var Job = new Jobs({
+  /*var Job = new Jobs({
     user_email: body.user_email,
-    jobid: body.jobid,
     company: body.company,
     job_title: body.job_title,
     location: body.location,
@@ -27,21 +26,19 @@ function handle_request(body, callback) {
     output: body.output,
     // pay_method: body.pay_method,
     apply: body.apply
-  });
+  });*/
 
-  Job.save(function(err, data) {
-    if (err) {
-      throw err;
-      callback(null, err);
-      // console.log(reply);
-    } else {
+  Jobs.create(msg)
+  .then(response=>{
       console.log("Job posted successfully\n");
-      console.log(data);
-      callback(null, data);
+      console.log(response);
+      callback(null, response);
     }
-  });
-
-  console.log("after callback");
+  )
+  .catch(err=>{
+    console.log(err)
+    callback(err, null)
+  })
 }
 
 exports.handle_request = handle_request;

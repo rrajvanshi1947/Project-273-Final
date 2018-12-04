@@ -41,7 +41,8 @@ function handle_request(msg, callback){
                 expdesc: user.expdesc !=undefined ? user.expdesc:'',
                 skill: user.skill !=undefined ? user.skill:'',
                 imageURL: user.imageURL !=undefined ? user.imageURL:'',
-                resumeURL: user.resumeURL !=undefined ? user.resumeURL:''
+                resumeURL: user.resumeURL !=undefined ? user.resumeURL:'',
+                connections: user.connections !=undefined ? user.connections:''
     }
         callback(null,output)
     })

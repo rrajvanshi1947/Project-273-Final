@@ -13,6 +13,9 @@ import Usersearch from './component/homepage/usersearch';
 import PostJob from './component/postjob/postjob';
 import MyPostedJob from './component/MyJob/mypostedjob';
 import EditJob from './component/editjob/editjob';
+import Viewjobappliedform from './component/viewjobappliedform/viewjobappliedform';
+import Connection from './component/connection/connections';
+import ApplicantDashboard from './component/dashboard/applicantdash';
 
 class Router extends Component {
     render() {
@@ -32,6 +35,9 @@ class Router extends Component {
                 <Route exact path="/postjob" component={PostJob} />
                 <Route exact path="/myjob" component={MyPostedJob} />
                 <Route exact path="/postjob/:jobid" component={EditJob} />
+                <Route exact path="/connections" component={Connection} />
+                <Route exact path="/viewjobappliedform/:appid" component={Viewjobappliedform} />
+                <Route exact path="/applicantdashboard" component={ApplicantDashboard}/>
             </Switch>
             </BrowserRouter>
         )

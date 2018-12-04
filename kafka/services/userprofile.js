@@ -34,7 +34,7 @@ function handle_request(msg, callback){
             expdesc: msg.expdesc,
             skill: msg.skill,
             imageURL: msg.imageURL,
-            resumeURL: msg.resumeURL
+            resumeURL: msg.resumeURL,
         }},
         {upsert: true, new: true}
     )
@@ -72,6 +72,7 @@ function handle_request(msg, callback){
             skill: user.skill !=undefined ? user.skill:'',
             imageURL: user.imageURL !=undefined ? user.imageURL:'',
             resumeURL: user.resumeURL !=undefined ? user.resumeURL:'',
+            connections: user.connections !=undefined ? user.connections:[]
         }
         console.log("User Profile updated successfully", output)
         callback(null,output)

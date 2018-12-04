@@ -11,8 +11,8 @@ class PostJob extends Component {
     constructor() {
         super();
         this.state = {
-            	"user_email": "",
-                "jobid": "",      
+              "user_email": "",
+              jobid:"",     
                 "company": "",    
                 "job_title": "",
                 "location": "",
@@ -72,7 +72,7 @@ this.applyChangeHandler = this.applyChangeHandler.bind(this)
     console.log("Email",this.props.login)
      const data = {
                 "user_email": this.props.login.emailID,
-                //"jobid": Math.floor(Math.random()*10000),      
+                "jobid": Math.floor(Math.random()*10000),      
                 "company": this.state.company,    
                 "job_title": this.state.job_title,
                 "location": this.state.location,

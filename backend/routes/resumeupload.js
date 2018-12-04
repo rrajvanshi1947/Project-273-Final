@@ -10,10 +10,9 @@ const router = express.Router();
 
 /**************Code goes here*******************/
 AWS.config.update({
-  //accesskeyif:AKIAI6XU3MCBOPF6W6WA
-  //secretaccesskey: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
-    accessKeyId: "AKIAI6XU3MCBOPF6W6WA",
-    secretAccessKey: "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"
+
+    accessKeyId: "",
+    secretAccessKey: ""
   });
   
   // configure AWS to work with promises

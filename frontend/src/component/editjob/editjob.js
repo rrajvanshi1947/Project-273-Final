@@ -92,7 +92,7 @@ class EditJob extends Component {
                 // "pay_method":
      };
      //set the with credentials to true
-     axios.defaults.withCredentials = true;
+     //axios.defaults.withCredentials = true;
      //make a post request with the user data
      axios.post(`/editjob`, data).then(response => {
        console.log(response);

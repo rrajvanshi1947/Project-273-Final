@@ -4,7 +4,7 @@
   "description": "Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "",
   "license": "ISC",
@@ -15,12 +15,15 @@
     "body-parser": "^1.18.3",
     "connect-mongo": "^2.0.2",
     "cookie-parser": "^1.4.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "file-type": "^10.5.0",
     "fs": "0.0.1-security",
     "kafka-node": "^3.0.1",
+    "mocha": "^5.2.0",
     "mongodb": "^3.1.9",
     "mongoose": "^5.3.11",
     "mongoose-auto-increment": "^5.0.1",

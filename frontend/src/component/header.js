@@ -4,7 +4,7 @@ import { connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actionCreators from '../actions/actionCreators';
 import axios from 'axios';
-import {nodeURL} from '../config';
+//import {nodeURL} from '../config';
 import Usersearch from './homepage/usersearch'
 
 class Header extends Component {
@@ -79,7 +79,7 @@ class Header extends Component {
                                     <Link to="/Jobsearch"><span className="glyphicon glyphicon-briefcase" style={{color: "white"}}></span></Link>
                                 </div>
                                 <div className="col-sm-2" style={{ float: "right" }}>
-                                    <Link to="#"><span className="glyphicon glyphicon-user" style={{color:'white'}}></span></Link>
+                                    <Link to="/connections"><span className="glyphicon glyphicon-user" style={{color:'white'}}></span></Link>
                                 </div>
                                 <div className="col-sm-1" style={{ float: "right" }}>
                                     <Link to="/feed"><span className="glyphicon glyphicon-home" style={{color:'white'}}></span></Link>
@@ -98,6 +98,7 @@ class Header extends Component {
                                         </div>
                                         {/*Add condition for recruiter*/}
                                         {this.props.login.type==="1"?<li><Link to="/dashboard">Dashboard</Link></li> :null}
+                                        {this.props.login.type==="0"?<li><Link to="/applicantdashboard">Dashboard</Link></li> :null}
                                         {this.props.login.type==="1"?<li><Link to="/myjob">My Posted Job</Link></li>:null}
                                         <li><Link to="#">Settings & Privacy</Link></li>
                                         <li><Link to="#">Help Center</Link></li>
@@ -120,7 +121,7 @@ class Header extends Component {
                                     <Link to="/Jobsearch"><span style={{color: "white"}}>Jobs</span></Link>
                                 </div>
                                 <div className="col-sm-2" style={{ float: "right" }}>
-                                    <Link to="#"><span style={{color: "white"}}>My Network</span></Link>
+                                    <Link to="/connections"><span style={{color: "white"}}>My Network</span></Link>
                                 </div>
                                 <div className="col-sm-1" style={{ float: "right" }}>
                                 <Link to="/feed"><span style={{color: "white"}}>Home</span></Link>

@@ -55,7 +55,9 @@ function handle_request(msg, callback){
           expdesc:'',
           skill:'',
           imageURL:'',
-          resumeURL:''
+          resumeURL:'',
+          noofviews: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+          connections:[]
             }
         console.log("User signed up successfully", output)
         callback(null,output)

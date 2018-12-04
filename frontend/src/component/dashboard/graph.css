@@ -1,0 +1,33 @@
+.ct-series-a .ct-bar {
+    /* Colour of your bars */
+    stroke: red;
+    /* The width of your bars */
+    stroke-width: 30px;
+  }
+
+  [data-x-axis]::before {
+    content: attr(data-x-axis);
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    left: 0;
+    bottom: 0;
+    font-size: 13px;
+    color: rgba(0, 128, 0, 0.979);
+}
+
+[data-y-axis]::after {
+    content: attr(data-y-axis);
+    position: absolute;
+    top: 50%;
+    left: -30px;
+    font-size: 13px;
+    color:rgba(0, 128, 0, 0.979);
+    text-align: center;
+    transform: rotate(-90deg)translateY(50%);
+}
+
+.ct-label {
+    font-size: 12px;
+    color: black;
+}

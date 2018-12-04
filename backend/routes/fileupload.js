@@ -11,8 +11,8 @@ const multiparty = require("multiparty");
 
 // configure the keys for accessing AWS
 AWS.config.update({
-    accessKeyId: "AKIAJJTV5FGZEIVWQ3MA",
-    secretAccessKey: "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"
+    accessKeyId: "",
+    secretAccessKey: ""
   });
   
   // configure AWS to work with promises
@@ -26,7 +26,7 @@ AWS.config.update({
     const params = {
       ACL: "public-read",
       Body: buffer,
-      Bucket: "cmpe273-linkedin",
+      Bucket: "",
       ContentType: type.mime,
       Key: `${name}.${type.ext}`
     };

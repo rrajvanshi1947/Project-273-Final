@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 mongoose.set("debug", true);
-const ConnectModel = require("../models/connections");
+const User = require("../models/users");
 function handle_request(msg, callback) {
   console.log("Logged in user email : ", msg);
-  ConnectModel.find({ email: msg }, "connected")
-    .populate("connected")
-    .exec((error, results) => {
-      if (error) callback(error, null);
-
-      callback(null, results);
-    });
+  User.find({ emailID: msg })
+  .then(results=>{
+    console.log(results)
+    callback(null, results);
+  })
+.catch(err => {
+  callback(err,null);
+})
 }
 
 exports.handle_request = handle_request;

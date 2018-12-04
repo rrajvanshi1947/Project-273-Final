@@ -44,6 +44,9 @@ const deleteaccountRoutes = require("./routes/deleteaccount");
 const postJob = require("./routes/postjob");
 const getApplicants= require("./routes/applicants");
 const editJob = require("./routes/editjob");
+const graphRoutes = require("./routes/graphs");
+const getViews = require("./routes/getviews");
+const searchclick = require('./routes/searchclick');
 
 //specify the path of static directory
 //app.use(express.static(__dirname + "/public"));
@@ -97,6 +100,7 @@ app.post("/fileupload", fileuploadRoutes);
 app.post("/connection", connection);
 app.post("/jobsearch", jobsearchRoutes);
 app.post("/jobapply", jobapplyRoutes);
+app.get("/jobapply", jobapplyRoutes);
 app.post("/jobsave", jobsaveRoutes);
 app.post("/test-upload", resumeuploadRoutes);
 app.get("/usersearch", userprofileRoutes);
@@ -109,6 +113,16 @@ app.get("/mypostedjob",signinRoutes);
 app.get("/applicants",getApplicants);
 app.get("/editjob", editJob);
 app.post("/editjob", editJob);
+app.get("/graph1", graphRoutes);
+app.get("/graph2", graphRoutes);
+app.get("/graph3", graphRoutes);
+app.get("/graph4", graphRoutes);
+app.get("/graph5", graphRoutes);
+app.get("/graph6", graphRoutes);
+app.get("/graph6sj", graphRoutes);
+app.get("/graph7", graphRoutes);
+app.post("/getviews", getViews);
+app.post('/searchclick', searchclick);
 
 // start your server on port 3001
 app.listen(3001);

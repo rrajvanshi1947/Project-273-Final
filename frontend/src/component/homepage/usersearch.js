@@ -46,6 +46,21 @@ class Usersearch extends Component{
             this.setState({users:data})
         })
     }
+    //Adding Jyothsna changes
+    getViews = (e) => {
+        e.preventDefault();
+        console.log("On click get views");
+        console.log(this.props);
+        console.log(this.props.login.emailID)
+        const data = {
+            emailID : "app4@gmail.com"
+        }
+        axios.post(`/getviews`,  data)
+        .then(response => {
+            console.log("Response: ", response.data);
+        })
+    }
+
     getData(id){
         let data = this.state.users[id];
         let email = this.state.users[id].emailID;
@@ -114,7 +129,7 @@ class Usersearch extends Component{
                                     <Link to="/Jobsearch"><span className="glyphicon glyphicon-briefcase" style={{color: "white"}}></span></Link>
                                 </div>
                                 <div className="col-sm-2" style={{ float: "right" }}>
-                                    <Link to="#"><span className="glyphicon glyphicon-user" style={{color:'white'}}></span></Link>
+                                    <Link to="/connections"><span className="glyphicon glyphicon-user" style={{color:'white'}}></span></Link>
                                 </div>
                                 <div className="col-sm-1" style={{ float: "right" }}>
                                     <Link to="/feed"><span className="glyphicon glyphicon-home" style={{color:'white'}}></span></Link>
@@ -132,7 +147,9 @@ class Usersearch extends Component{
                                         <h5 style={{fontWeight:'600'}}>ACCOUNT</h5>
                                         </div>
                                         {/*Add condition for recruiter*/}
-                                        <li><Link to="/dashboard">Dashboard</Link></li>
+                                        {this.props.login.type==="1"?<li><Link to="/dashboard">Dashboard</Link></li> :null}
+                                        {this.props.login.type==="0"?<li><Link to="/applicantdashboard">Dashboard</Link></li> :null}
+                                        {this.props.login.type==="1"?<li><Link to="/myjob">My Posted Job</Link></li>:null}
                                         <li><Link to="#">Settings & Privacy</Link></li>
                                         <li><Link to="#">Help Center</Link></li>
                                         <li><Link to="#">Language</Link></li>
@@ -140,7 +157,8 @@ class Usersearch extends Component{
                                         <h5 style={{fontWeight:'600'}}>MANAGE</h5>
                                         </div>
                                         <li><Link to="#">Posts & Activity</Link></li>
-                                        <li><Link to="#">Job Postings</Link></li>
+                                        {this.props.login.type==="1"?
+                                        <li><Link to="/postjob">Job Postings</Link></li>:null}
                                         <li><Link to="#" onClick={this.deleteAccount} style={{borderTop: '1px solid grey', borderBottom:'1px solid grey'}}>Delete Account</Link></li>
                                         <li><Link to="#" onClick={this.logout} style={{borderTop:'1px solid grey'}}>Sign out</Link></li>
                                         </ul>
@@ -153,7 +171,7 @@ class Usersearch extends Component{
                                     <Link to="/Jobsearch"><span style={{color: "white"}}>Jobs</span></Link>
                                 </div>
                                 <div className="col-sm-2" style={{ float: "right" }}>
-                                    <Link to="#"><span style={{color: "white"}}>My Network</span></Link>
+                                    <Link to="/connections"><span style={{color: "white"}}>My Network</span></Link>
                                 </div>
                                 <div className="col-sm-1" style={{ float: "right" }}>
                                 <Link to="/feed"><span style={{color: "white"}}>Home</span></Link>
@@ -175,7 +193,7 @@ class Usersearch extends Component{
             </div>
             <div className="col-sm-10" style={{marginTop:"20px",paddingBottom:"30px",borderBottom:"1px solid grey"}}>
             <div className="header-item">
-               <Link to={`/userprofile/${user.emailID}`} style={{fontSize:'16px'}}><strong>{`${user.firstname} ${user.lastname}`}</strong></Link> 
+               <Link onClick ={this.getViews} to={`/userprofile/${user.emailID}`} style={{fontSize:'16px'}}><strong>{`${user.firstname} ${user.lastname}`}</strong></Link> 
             </div>
             <button id = {index} onClick ={()=>this.getData(index)} className="btn btn-default btn-md" data-toggle="modal" data-target="#vpMessage1" style={{border:"1px solid #0073b1",float:'right', color:"#0073b1"}}><strong>Message</strong></button>
             <span>{`${user.headline} at ${user.company}`}</span>

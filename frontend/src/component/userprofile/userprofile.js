@@ -25,7 +25,10 @@ class Userprofile extends Component {
             userprofile: [],
             isRecruiter: this.props.login.type,
             message:[],
-            resumeurl:''
+            resumeurl:'',
+            pending:false,
+            remove:false,
+            con:[]
         }
         this.submitDetails = this.submitDetails.bind(this);
     }
@@ -43,8 +46,19 @@ class Userprofile extends Component {
                 console.log("response",res.data);
                 this.props.updateProfile(res);
                 //update the state with the response data
+                console.log(res.data.connections)
+                let connection = typeof res.data.connections !=="undefined"? res.data.connections:[];
+                let connect = []
+                for(let con of connection){
+                    console.log(con)
+                    if(con.emailID === this.props.login.emailID){
+                        connect = con;
+                    }
+                }
+                console.log(connection,connect);
                 this.setState({
-                    userprofile : [res.data]
+                    userprofile : [res.data],
+                    con:connect
                 });
                 console.log("UserProfile",this.state.userprofile);
             });
@@ -176,6 +190,64 @@ class Userprofile extends Component {
     }
     }
 
+    connection=()=>{
+        let data = [{
+            emailID: this.props.login.emailID,
+            firstname: this.props.login.firstname,
+            lastname: this.props.login.lastname,
+            company: this.props.login.company,
+            location:this.props.login.location,
+            imageURL:this.props.imageURL,
+            buttons:"pending",
+        },{
+            emailID: this.state.userprofile[0].emailID,
+            firstname: this.state.userprofile[0].firstname,
+            lastname: this.state.userprofile[0].lastname,
+            company: this.state.userprofile[0].company,
+            location:this.state.userprofile[0].location,
+            imageURL:this.state.userprofile[0].imageURL,
+            buttons:"accept"
+        }
+    ]
+        console.log(data)
+        axios.post('/requestconnection',data)
+        .then(response=>{
+            if(response.status ===200){
+                this.setState({pending:true})
+            }
+        })
+    }
+
+    accept=()=>{
+        let data = [{
+            emailID: this.props.login.emailID,
+            buttons:"remove",
+        },{
+            emailID: this.state.userprofile[0].emailID,
+            buttons:"remove"
+        }]
+        console.log(data)
+        axios.post('/acceptconnection',data)
+        .then(response=>{
+            if(response.status ===200){
+                this.setState({remove:true})
+            }
+        })
+    }
+
+    deleteCon=()=>{
+        let data = [{
+            emailID: this.props.login.emailID,
+        },{
+            emailID: this.state.userprofile[0].emailID,
+        }]
+        axios.post('/removeconnection',data)
+        .then(response=>{
+            if(response.status ===200){
+                this.setState({remove:false,pending:false,con:[]})
+            }
+        })
+    }
     
     render() {
         let userprofileDetails, userprofileDetails1, userprofileDetails2, userprofileDetails3, userprofileDetails4;
@@ -258,16 +330,24 @@ class Userprofile extends Component {
         }
         console.log("isemailMatch: ", isemailMatch);
 
+        if ((this.props.match.params.emailID === this.props.login.emailID) ) {
+            var submitBtn = (
+                <button type="submit" className="btn btn-primary" onClick={this.submitDetails} style={{ marginTop: "20px", marginLeft: "420px", marginBottom: "30px" }}>Submit Changes</button>
+            )
+        } else {
+            var submitBtn ='';
+        }
+
         
         console.log("Image URL in userprofile: ", this.props.login.imageURL);
         console.log("Recruiter: ", this.state.isRecruiter);
         if((this.state.isRecruiter === "1") && (this.props.match.params.emailID === this.props.login.emailID) ) {
-            userprofileDetails = <Introduction onSubmit={this.Introduction} value={this.state.userprofile[0]}>{this.state.userprofile[0].firstname}{this.state.userprofile[0].lastname}{upheadline}{upcity}{upstate}{upemailID}{upphonenum}{this.state.userprofile[0].type}{this.state.userprofile[0].imageURL}{isemailMatch}{this.state.userprofile[0].resumeURL}</Introduction> 
+            userprofileDetails = <Introduction onSubmit={this.Introduction} value={this.state.userprofile[0]} pending={this.state.pending} connect={this.connection} remove={this.state.remove} deleteCon={this.deleteCon} but={this.state.con} accept={this.accept}>{this.state.userprofile[0].firstname}{this.state.userprofile[0].lastname}{upheadline}{upcity}{upstate}{upemailID}{upphonenum}{this.state.userprofile[0].type}{this.state.userprofile[0].imageURL}{isemailMatch}{this.state.userprofile[0].resumeURL}</Introduction> 
             userprofileDetails1 = <PhotoUpload>{this.props.match.params.emailID}{isemailMatch}</PhotoUpload>
         } else {
             console.log("Applicant")
         
-            userprofileDetails = <Introduction onSubmit={this.Introduction} value={this.state.userprofile[0]} handleResume={this.handleResume}>{this.state.userprofile[0].firstname}{this.state.userprofile[0].lastname}{upheadline}{upcity}{upstate}{upemailID}{upphonenum}{this.state.userprofile[0].type}{this.state.userprofile[0].imageURL}{isemailMatch}{this.state.userprofile[0].resumeURL}</Introduction> 
+            userprofileDetails = <Introduction onSubmit={this.Introduction} value={this.state.userprofile[0]} handleResume={this.handleResume} pending={this.state.pending} connect={this.connection} remove={this.state.remove} deleteCon={this.deleteCon} but={this.state.con} accept={this.accept}>{this.state.userprofile[0].firstname}{this.state.userprofile[0].lastname}{upheadline}{upcity}{upstate}{upemailID}{upphonenum}{this.state.userprofile[0].type}{this.state.userprofile[0].imageURL}{isemailMatch}{this.state.userprofile[0].resumeURL}</Introduction> 
             userprofileDetails1 = <PhotoUpload>{this.props.match.params.emailID}{isemailMatch}</PhotoUpload>
             userprofileDetails2 = <Education onSubmit={this.Education} > {upschool}{upfromyear}{uptoyear}{isemailMatch}</Education> 
             userprofileDetails3 = <Experience onSubmit={this.Experience} > {uptitle}{upcompany}{upmonth}{upyear}{isemailMatch}</Experience> 
@@ -294,7 +374,7 @@ class Userprofile extends Component {
                         {userprofileDetails4}
                     </div>
                 </div>
-                <button type="submit" className="btn btn-primary" onClick={this.submitDetails} style={{ marginTop: "20px", marginLeft: "420px", marginBottom: "30px" }}>Submit Changes</button>
+                {submitBtn}
                 <Message onSubmit={this.send} userToMsg={typeof this.state.userprofile!=='undefined'?this.state.userprofile[0]:null} messages={this.state.message}/>
             </div>
         )
@@ -302,7 +382,7 @@ class Userprofile extends Component {
 }
 
 function mapStateToProps(state){
-    return {login: state.login.loginData, error:state.login.error}
+    return {login: state.login.loginData, profile:state.profile.profileData}
 }
 
 function mapDispatchToProps(dispatch){

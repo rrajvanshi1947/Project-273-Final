@@ -70,11 +70,29 @@ class Jobsearch extends Component {
       }
 
     
-      navigate(id){
-          let data = this.state.filteredData[id];
-          console.log("Job", data)
-        this.setState({job:data})
-    }
+    navigate(id){
+        let data = this.state.joblist[id];
+        console.log("job data",data.jobid);
+        const clickdetails={
+            jobid: data.jobid,
+        }
+        console.log("clickdetails",clickdetails);
+        axios.defaults.withCredentials = true;
+      axios.post(`/searchclick`, clickdetails)
+      .then(response=> {
+          console.log(response.data)
+          if(response.status === 200){
+              alert('click incremented successfully');
+          } else {
+              alert('click not incremented successfully ');
+          }
+      })
+      .catch(err=>{
+          alert('increment err not found');
+      })
+        console.log("Job", data)
+      this.setState({job:data})
+  }
 
     save(job){
         const jobdetailsdata = {
