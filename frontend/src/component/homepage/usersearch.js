@@ -47,17 +47,19 @@ class Usersearch extends Component{
         })
     }
     //Adding Jyothsna changes
-    getViews = (e) => {
-        e.preventDefault();
+    getViews = (user_email) => {
+        //e.preventDefault();
         console.log("On click get views");
         console.log(this.props);
         console.log(this.props.login.emailID)
         const data = {
-            emailID : "app4@gmail.com"
+            emailID : user_email
         }
         axios.post(`/getviews`,  data)
         .then(response => {
             console.log("Response: ", response.data);
+            //this.props.history.push(`/userprofile/${user_email}`)
+
         })
     }
 
@@ -193,7 +195,7 @@ class Usersearch extends Component{
             </div>
             <div className="col-sm-10" style={{marginTop:"20px",paddingBottom:"30px",borderBottom:"1px solid grey"}}>
             <div className="header-item">
-               <Link onClick ={this.getViews} to={`/userprofile/${user.emailID}`} style={{fontSize:'16px'}}><strong>{`${user.firstname} ${user.lastname}`}</strong></Link> 
+               <Link onClick ={this.getViews(user.emailID)} to={`/userprofile/${user.emailID}`} style={{fontSize:'16px'}}><strong>{`${user.firstname} ${user.lastname}`}</strong></Link> 
             </div>
             <button id = {index} onClick ={()=>this.getData(index)} className="btn btn-default btn-md" data-toggle="modal" data-target="#vpMessage1" style={{border:"1px solid #0073b1",float:'right', color:"#0073b1"}}><strong>Message</strong></button>
             <span>{`${user.headline} at ${user.company}`}</span>
